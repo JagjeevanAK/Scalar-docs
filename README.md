@@ -2,12 +2,24 @@
 
 This project provides beautiful API documentation for the Open Food Facts API using Scalar.
 
-## Files
+## Project Structure
 
-- `index.html` - Main HTML file that loads Scalar and renders the API documentation
-- `openapi.json` - OpenAPI 3.1.0 specification for the Open Food Facts API
-- `vercel.json` - Vercel deployment configuration
-- `package.json` - Node.js project configuration
+All static files must be inside the `public` directory for Vercel deployment:
+
+```
+public/
+  index.html
+  specfiles-json/
+    openapi.json
+    openapi-v3.json
+    folksonomy-openapi.json
+    kPanels-openapi.json
+    open-prices-openapi.json
+    robotoff-openapi.json
+vercel.json
+package.json
+README.md
+```
 
 ## Local Development
 
@@ -15,7 +27,7 @@ To run this locally:
 
 ```bash
 npm install
-npm run dev
+npx serve public
 ```
 
 Then open your browser to `http://localhost:3000` (or the port shown in terminal).
@@ -28,16 +40,15 @@ Then open your browser to `http://localhost:3000` (or the port shown in terminal
    ```bash
    npm i -g vercel
    ```
-
 2. Login to Vercel:
    ```bash
    vercel login
    ```
-
 3. Deploy:
    ```bash
-   vercel
+   vercel --prod
    ```
+   Make sure your output directory is set to `public` in your Vercel project settings.
 
 ### Option 2: Deploy via GitHub (Recommended)
 
@@ -45,19 +56,8 @@ Then open your browser to `http://localhost:3000` (or the port shown in terminal
 2. Go to [vercel.com](https://vercel.com)
 3. Click "New Project"
 4. Import your GitHub repository
-5. Vercel will automatically detect this as a static site and deploy it
-
-### Option 3: Deploy via Vercel Dashboard
-
-1. Zip this folder
-2. Go to [vercel.com](https://vercel.com)
-3. Drag and drop the zip file onto the deployment area
-
-## Features
-
-- ✅ Modern, responsive API documentation interface
-- ✅ Interactive API explorer
-- ✅ Proper CORS headers for API testing
+5. Set the output directory to `public` if prompted
+6. Vercel will automatically deploy your static site
 - ✅ Optimized for Vercel deployment
 - ✅ Mobile-friendly design
 
