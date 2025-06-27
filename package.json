@@ -1,0 +1,23 @@
+{
+  "name": "openfoodfacts-api-docs",
+  "version": "1.0.0",
+  "description": "Open Food Facts API documentation powered by Scalar",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "api",
+    "documentation",
+    "openapi",
+    "scalar",
+    "openfoodfacts"
+  ],
+  "author": "OpenFoodFacts",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

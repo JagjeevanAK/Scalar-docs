@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Open Food Facts API Documentation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Comprehensive API documentation for Open Food Facts - the collaborative food database. Explore endpoints for product information, search, and contributions." />
+    <meta name="keywords" content="OpenAPI, API Documentation, Open Food Facts, Food Database, REST API" />
+    <meta name="author" content="Open Food Facts" />
+    <link rel="icon" type="image/x-icon" href="https://static.openfoodfacts.org/images/favicon.ico" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Open Food Facts API Documentation" />
+    <meta property="og:description" content="Comprehensive API documentation for Open Food Facts - the collaborative food database." />
+    <meta property="og:url" content="https://your-deployment-url.vercel.app" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+</head>
+
+<body>
+        <div style="margin: 24px 0; text-align: center;">
+            <label for="spec-select" style="font-weight: 500; margin-right: 8px;">Select API Spec:</label>
+            <select id="spec-select" style="padding: 4px 8px; font-size: 1rem;">
+                <option value="openapi.json">openapi.json</option>
+                <option value="openapi-v3.json">openapi-v3.json</option>
+                <option value="folksonomy-openapi.json">folksonomy-openapi.json</option>
+                <option value="kPanels-openapi.json">kPanels-openapi.json</option>
+                <option value="open-prices-openapi.json">open-prices-openapi.json</option>
+                <option value="robotoff-openapi.json">robotoff-openapi.json</option>
+            </select>
+        </div>
+        <div id="app"></div>
+
+        <!-- Load the Script -->
+        <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+
+        <!-- Initialize the Scalar API Reference -->
+        <script>
+            function loadScalar(specFile) {
+                // Remove previous Scalar instance if any
+                if (window.scalarInstance && window.scalarInstance.destroy) {
+                    window.scalarInstance.destroy();
+                }
+                document.getElementById('app').innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif;"><div style="text-align: center;"><div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px;"></div><p style="color: #666; margin: 0;">Loading API Documentation...</p></div></div><style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>';
+                setTimeout(function() {
+                    window.scalarInstance = Scalar.createApiReference('#app', {
+                        url: './specfiles-json/' + specFile,
+                        theme: 'default',
+                        layout: 'modern',
+                        showSidebar: true,
+                        searchHotKey: 'k',
+                        hideDownloadButton: false,
+                        hideTestRequestButton: false,
+                        customCss: `
+                            .scalar-app {
+                                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                            }
+                            .scalar-sidebar {
+                                border-right: 1px solid #e5e7eb;
+                            }
+                            .scalar-content {
+                                max-width: none;
+                            }
+                            @media (max-width: 768px) {
+                                .scalar-app {
+                                    font-size: 14px;
+                                }
+                            }
+                        `,
+                        metaData: {
+                            title: 'Open Food Facts API Documentation',
+                            description: 'Comprehensive API documentation for Open Food Facts - the collaborative food database.',
+                            ogDescription: 'Explore endpoints for product information, search, and contributions to the Open Food Facts database.'
+                        }
+                    });
+                }, 100);
+            }
+
+            // Initial load
+            loadScalar(document.getElementById('spec-select').value);
+
+            // Change event
+            document.getElementById('spec-select').addEventListener('change', function(e) {
+                loadScalar(e.target.value);
+            });
+        </script>
+    </body>
+</html>
